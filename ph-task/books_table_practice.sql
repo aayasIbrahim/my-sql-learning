@@ -24,3 +24,6 @@ VALUES
 (12, 'The Great Adventure', 'John Anderson', 'Fiction', 16.99, 2020, 18),
 (13, 'Mystery in Paris', 'Marie Dubois', 'Mystery', 14.99, 2019, 27),
 (14, 'Romance in Rome', 'Isabella Rossi', 'Romance', 13.99, 2021, 35);
+
+--Display all books with their titles and prices, ordered by price (lowest to highest)
+select title,price from books  order by price asc
