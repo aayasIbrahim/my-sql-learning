@@ -150,3 +150,60 @@ SELECT * FROM students WHERE country IN ('Bangladesh', 'India', 'Japan');
 
 -- Select students enrolled in specific target courses
 SELECT * FROM students WHERE course IN ('Computer Science', 'Physics', 'BBA');
+
+-- ====================================================================
+-- 6. MULTI-CONDITION FILTERING (AND / OR / IN OPERATORS)
+-- ====================================================================
+
+-- Select students from India or Canada using the OR operator
+SELECT first_name, country FROM students WHERE country = 'India' OR country = 'Canada';
+
+-- Select students with grade 'A' or 'B' who are enrolled in Physics or Mathematics
+SELECT first_name, course, grade FROM students 
+WHERE (grade = 'A' OR grade = 'B') AND (course = 'Physics' OR course = 'Mathematics');
+
+-- Select students from India who are exactly 22 years old
+SELECT first_name, country, age FROM students WHERE country = 'India' AND age = 22;
+
+-- Select 22-year-old students who are either from Bangladesh or India
+SELECT * FROM students WHERE age = 22 AND (country = 'Bangladesh' OR country = 'India');
+
+-- Select students from Bangladesh, India, or Japan using the IN operator
+SELECT * FROM students WHERE country IN ('Bangladesh', 'India', 'Japan');
+
+-- Select students enrolled in specific target courses
+SELECT * FROM students WHERE course IN ('Computer Science', 'Physics', 'BBA');
+
+
+-- ====================================================================
+-- 7. SCALAR FUNCTIONS PRACTICE (String & Formatting functions)
+-- ====================================================================
+
+-- Convert all first names to uppercase
+SELECT UPPER(first_name) AS first_name_upper FROM students;
+
+-- Convert all last names to lowercase
+SELECT LOWER(last_name) AS last_name_lower FROM students;
+
+-- Get the character length of each student's email address
+SELECT LENGTH(email) AS count_of_email FROM students;
+
+-- Concatenate first_name and last_name with a space in between to form full name
+SELECT CONCAT(first_name, ' ', last_name) AS full_Name FROM students;
+
+
+-- ====================================================================
+-- 8. AGGREGATE FUNCTIONS PRACTICE (Calculations on multiple rows)
+-- ====================================================================
+
+-- Calculate the average age of all students
+SELECT AVG(age) AS average_age FROM students;
+
+-- Find the minimum/youngest age among all students
+SELECT MIN(age) AS minimum_age FROM students;
+
+-- Find the maximum/oldest age among all students
+SELECT MAX(age) AS maximum_age FROM students;
+
+-- Count the total number of non-null age entries in the table
+SELECT COUNT(age) AS total_students_count FROM students;
