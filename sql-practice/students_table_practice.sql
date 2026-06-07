@@ -1,10 +1,14 @@
--- =======================================================
--- Project: Student Database Practice & Query Filtering
--- Description: Creating table, altering, inserting data, 
---              and performing various SQL selections.
--- =======================================================
+-- ====================================================================
+-- Project    : Student Database Management System (Practice Script)
+-- Description: Table creation, modifications, data insertion, 
+--              and advanced query filtering using various operators.
+-- ====================================================================
 
--- 1. Create Student Table
+-- ====================================================================
+-- 1. DATABASE SCHEMA CREATION & MODIFICATIONS
+-- ====================================================================
+
+-- Create the initial student table
 CREATE TABLE student(
   id SERIAL PRIMARY KEY,
   first_name VARCHAR(50) NOT NULL,
@@ -18,17 +22,21 @@ CREATE TABLE student(
   country VARCHAR(50)
 );
 
--- 2. Rename Table Name
+-- Rename table to plural form for standard convention
 ALTER TABLE student RENAME TO students;
   
--- 3. Modify Column Type (Increasing size of blood_group)
+-- Modify blood_group column type to support longer character strings
 ALTER TABLE students ALTER COLUMN blood_group TYPE VARCHAR(50);
   
--- 4. Constraint Practice (Set and Drop NOT NULL)
+-- Practice setting and dropping constraints (NOT NULL)
 ALTER TABLE students ALTER COLUMN age SET NOT NULL;
 ALTER TABLE students ALTER COLUMN age DROP NOT NULL;
-  
--- 5. Insert 30 Dummy Records
+
+
+-- ====================================================================
+-- 2. DATA INSERTION (30 Dummy Records)
+-- ====================================================================
+
 INSERT INTO students(first_name, last_name, age, grade, course, email, dob, blood_group, country)
 VALUES
 ('Aarif', 'Anam', 20, 'A', 'Computer Science', 'aarif.anam@email.com', '2006-05-12', 'O+', 'Bangladesh'),
@@ -62,47 +70,83 @@ VALUES
 ('Ishrat', 'Jahan', 22, 'A+', 'Law', 'ishrat.j@email.com', '2004-11-20', 'O+', 'Bangladesh'),
 ('Mustafa', 'Kamal', 20, 'B', 'Statistics', 'mustafa.k@email.com', '2006-09-03', 'AB-', 'Bangladesh');
 
--- =======================================================
--- 6. Data Selection & Queries
--- =======================================================
 
--- Simple Select
+-- ====================================================================
+-- 3. BASIC SELECTION & ALIASING
+-- ====================================================================
+
+-- Fetch specific columns for all students
 SELECT first_name, last_name, grade, course FROM students;
 
--- Column Alias
+-- Retrieve records using column aliases for readable output
 SELECT first_name AS "First Name", age AS user_age FROM students;
 
--- Sorting (ORDER BY)
+
+-- ====================================================================
+-- 4. SORTING & DISTINCT VALUES
+-- ====================================================================
+
+-- Sort students by age in descending order (oldest first)
 SELECT first_name, last_name, grade, age FROM students ORDER BY age DESC;
+
+-- Sort students by age in ascending order (youngest first)
 SELECT first_name, last_name, grade, age FROM students ORDER BY age ASC;
 
--- Distinct (Unique Values)
+-- Get all unique age groups present in the table
 SELECT DISTINCT age FROM students;
+
+-- Get a list of all unique courses offered
 SELECT DISTINCT course FROM students;
+
+-- Get a list of all unique countries represented by students
 SELECT DISTINCT country FROM students;
 
--- =======================================================
--- 7. Filtering (WHERE clause)
--- =======================================================
+
+-- ====================================================================
+-- 5. FILTERING DATA WITH COMPARISON & LOGICAL OPERATORS
+-- ====================================================================
+
+-- Select students who are older than 20
+SELECT * FROM students WHERE age > 20;
+
+-- Select all student records
+SELECT * FROM students;
+
+-- Retrieve all students excluding those from Bangladesh
+SELECT * FROM students WHERE country != 'Bangladesh';
+
+-- Select students whose age is NOT between 20 and 22
+SELECT country, age FROM students WHERE age NOT BETWEEN 20 AND 22;
 
 -- Select students from India
 SELECT first_name, country FROM students WHERE country = 'India';
 
--- Select students with 'A' grade  
+-- Select students who achieved an 'A' grade  
 SELECT first_name, grade, course, blood_group FROM students WHERE grade = 'A'; 
 
--- Select students with blood group 'A+'
+-- Select students with a specific blood group ('A+')
 SELECT * FROM students WHERE blood_group = 'A+';
 
--- OR Operator (India or Canada)
+
+-- ====================================================================
+-- 6. MULTI-CONDITION FILTERING (AND / OR / IN OPERATORS)
+-- ====================================================================
+
+-- Select students from India or Canada using the OR operator
 SELECT first_name, country FROM students WHERE country = 'India' OR country = 'Canada';
 
--- Complex OR & AND Combo (Grade A/B in Physics/Math)
+-- Select students with grade 'A' or 'B' who are enrolled in Physics or Mathematics
 SELECT first_name, course, grade FROM students 
 WHERE (grade = 'A' OR grade = 'B') AND (course = 'Physics' OR course = 'Mathematics');
 
--- AND Operator (From India and age is 22)
+-- Select students from India who are exactly 22 years old
 SELECT first_name, country, age FROM students WHERE country = 'India' AND age = 22;
 
--- Mixed Conditions (Age 22 and from BD or India)
+-- Select 22-year-old students who are either from Bangladesh or India
 SELECT * FROM students WHERE age = 22 AND (country = 'Bangladesh' OR country = 'India');
+
+-- Select students from Bangladesh, India, or Japan using the IN operator
+SELECT * FROM students WHERE country IN ('Bangladesh', 'India', 'Japan');
+
+-- Select students enrolled in specific target courses
+SELECT * FROM students WHERE course IN ('Computer Science', 'Physics', 'BBA');
