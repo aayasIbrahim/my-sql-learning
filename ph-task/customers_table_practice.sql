@@ -23,3 +23,20 @@ VALUES
 
 --Find all distinct countries where customers are from
 SELECT DISTINCT country FROM customers;
+
+--Change the column name first_name to customer_first_name in the customers table
+alter table customers 
+rename column first_name to "customer_first_name"
+
+--Find all customers whose email addresses end with .com and are from either USA or UK
+select * from customers where country IN ('USA','UK') AND email like  '%.com' 
+
+--Display all customers with their full name in uppercase (concatenated first and last name),
+--original email, and city in lowercase.
+--Only show customers from USA or UK.
+SELECT 
+    UPPER(CONCAT(customer_first_name, ' ', last_name)) AS full_name,
+    email, 
+    LOWER(city) AS city_lower_case 
+FROM customers 
+WHERE  country IN ('USA', 'UK');

@@ -1,11 +1,11 @@
 CREATE TABLE books (
-  book_id SERIAL PRIMARY KEY,      -- Integer এবং অটো-ইনক্রিমেন্ট প্রাইমারি কি
-  title VARCHAR(200) NOT NULL,     -- সর্বোচ্চ ২০০ ক্যারেক্টার (বইয়ের নাম থাকা বাধ্যতামূলক)
-  author VARCHAR(100) NOT NULL,    -- সর্বোচ্চ ১০০ ক্যারেক্টার
-  genre VARCHAR(50),               -- সর্বোচ্চ ৫০ ক্যারেক্টার
+  book_id SERIAL PRIMARY KEY,      
+  title VARCHAR(200) NOT NULL,     
+  author VARCHAR(100) NOT NULL,  
+  genre VARCHAR(50),              
   price DECIMAL(10, 2),            -- মোট ১০টি ডিজিট, দশমিকের পরে ২টি ডিজিট
-  publication_year INT,            -- Integer ফিল্ড বছর জমার জন্য
-  stock_quantity INT               -- স্টকের সংখ্যা রাখার জন্য Integer ফিল্ড
+  publication_year INT,            
+  stock_quantity INT               
 );
 
 INSERT INTO books (book_id, title, author, genre, price, publication_year, stock_quantity)
@@ -27,3 +27,14 @@ VALUES
 
 --Display all books with their titles and prices, ordered by price (lowest to highest)
 select title,price from books  order by price asc
+
+--Find all books whose titles start with "The"
+select * from books where title like 'The%'
+--Find all books in the Fantasy genre
+select * from books where genre ='Fantasy'
+
+--Find the average price of books by genre, but only show genres with an average price greater than $14
+SELECT genre, AVG(price) AS average_price
+FROM books
+GROUP BY genre
+HAVING AVG(price) > 14;

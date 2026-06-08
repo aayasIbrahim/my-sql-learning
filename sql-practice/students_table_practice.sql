@@ -173,7 +173,16 @@ SELECT * FROM students WHERE country IN ('Bangladesh', 'India', 'Japan');
 
 -- Select students enrolled in specific target courses
 SELECT * FROM students WHERE course IN ('Computer Science', 'Physics', 'BBA');
+ 
 
+-- Prothom nam (first_name) boro hater 'A' diye shuru hoy emon shob student-der khunja
+SELECT * FROM students WHERE first_name LIKE 'A%'; 
+
+-- Shesh nam (last_name) choto hater 'n' diye shesh hoy emon shob student-der khunja
+SELECT * FROM students WHERE last_name LIKE '%n';
+
+-- Case-insensitive bhabe (choto/boro jekono hater) jader email-er sheshe '@email.com' ache tader khunja
+SELECT * FROM students WHERE email ILIKE '%@email.com';
 
 -- ====================================================================
 -- 7. SCALAR FUNCTIONS PRACTICE (String & Formatting functions)
