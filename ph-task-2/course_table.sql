@@ -15,3 +15,14 @@ create table courses(
 (6, 'Cloud Computing Fundamentals', 'Cloud', 64.99, 'James Allen', 2020),
 (7, 'UI/UX Design Essentials', 'Design', 39.99, 'Laura Scott', 2022),
 (8, 'DevOps for Beginners', 'DevOps', 74.99, 'Michael Brown', 2023);
+
+--Show all courses ordered by price (highest to lowest) and limit the result to 5 courses.
+select course_title,price from courses 
+order by price desc limit 5
+
+--Display courses for page 2, assuming 3 courses per page, using LIMIT and OFFSET.  
+select * from courses limit 3 offset 3*1
+
+--Update the price of all courses in the Programming category by increasing it 10% or 1.01
+update courses set price=price*1.10 where category ='Programming'
+
