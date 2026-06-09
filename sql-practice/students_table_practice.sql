@@ -205,6 +205,7 @@ SELECT CONCAT(first_name, ' ', last_name) AS full_Name FROM students;
 -- 8. AGGREGATE FUNCTIONS PRACTICE (Calculations on multiple rows)
 -- ====================================================================
 
+
 -- Calculate the average age of all students
 SELECT AVG(age) AS average_age FROM students;
 
