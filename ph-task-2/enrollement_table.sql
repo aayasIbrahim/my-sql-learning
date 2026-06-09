@@ -26,3 +26,7 @@ INSERT INTO enrollments (enrollment_id, student_id, course_id, enrollment_date, 
 (13, 3, 6, '2023-06-07', NULL, 64.99),
 (14, 4, 4, '2023-06-08', 85, 54.99),
 (15, 5, 5, '2023-06-09', 60, 79.99);
+
+
+--Delete all enrollment records where progress_percentage is NULL.
+delete from enrollments where progress_percentage is null

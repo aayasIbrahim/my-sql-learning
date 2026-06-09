@@ -26,3 +26,8 @@ select * from courses limit 3 offset 3*1
 --Update the price of all courses in the Programming category by increasing it 10% or 1.01
 update courses set price=price*1.10 where category ='Programming'
 
+--Find the total paid amount per course category using GROUP BY
+select category ,sum(price) as "paid_amount" from courses group by category
+
+--Show course categories where the average course price is greater than 60 using HAVING.
+select category,avg(price) from courses group by category having avg(price)>60
