@@ -30,3 +30,7 @@ INSERT INTO enrollments (enrollment_id, student_id, course_id, enrollment_date, 
 
 --Delete all enrollment records where progress_percentage is NULL.
 delete from enrollments where progress_percentage is null
+
+
+--Count how many students are enrolled in each course.
+select course_title, COUNT(student_id) AS student_count from enrollments inner join courses using(course_id) group by course_title

@@ -31,3 +31,6 @@ select category ,sum(price) as "paid_amount" from courses group by category
 
 --Show course categories where the average course price is greater than 60 using HAVING.
 select category,avg(price) from courses group by category having avg(price)>60
+
+--Display student full name, course title, and paid amount using an INNER JOIN.  
+select concat("first_name",' ',"last_name") as "fullName", course_title,paid_amount from enrollments inner join courses using(course_id) inner join students using(student_id)

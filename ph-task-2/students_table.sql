@@ -22,3 +22,6 @@ create table students(
 --Display all students and their phone numbers.
 --If the phone number is NULL, show 'Not Provided' using COALESCE.
 select first_name,last_name,coalesce(phone,'Not Providen') as "phone_number" from students
+
+Q9: Foreign Key Violation Explanation
+Explanation: > If you try to insert an enrollment record with a non-existent student_id, the database engine will block the query and throw a Foreign Key Constraint Violation Error. This happens because the student_id in the enrollments table acts as a pointer to the students table, and SQL enforces referential integrity to prevent orphaned or invalid records.
