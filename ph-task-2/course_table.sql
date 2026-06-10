@@ -34,3 +34,17 @@ select category,avg(price) from courses group by category having avg(price)>60
 
 --Display student full name, course title, and paid amount using an INNER JOIN.  
 select concat("first_name",' ',"last_name") as "fullName", course_title,paid_amount from enrollments inner join courses using(course_id) inner join students using(student_id)
+
+
+
+--Display all students and their enrolled courses.
+--Include students who have not enrolled in any course using a LEFT JOIN.
+select CONCAT(first_name, ' ',last_name) AS student_name, course_title from students left join enrollments using(student_id) left join courses using(course_id)
+
+--Display all courses and their enrolled students.
+--Include courses that have no enrollments using a RIGHT JOIN.
+
+SELECT *
+FROM enrollments e
+JOIN students s ON e.student_id = s.student_id
+RIGHT JOIN courses c ON e.course_id = c.course_id;

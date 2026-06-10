@@ -25,3 +25,9 @@ select first_name,last_name,coalesce(phone,'Not Providen') as "phone_number" fro
 
 Q9: Foreign Key Violation Explanation
 Explanation: > If you try to insert an enrollment record with a non-existent student_id, the database engine will block the query and throw a Foreign Key Constraint Violation Error. This happens because the student_id in the enrollments table acts as a pointer to the students table, and SQL enforces referential integrity to prevent orphaned or invalid records.
+
+--Find the average progress percentage per course, ignoring NULL values.
+SELECT c.course_title, AVG(e.progress_percentage) AS average_progress
+FROM enrollments e
+JOIN courses c ON e.course_id = c.course_id
+GROUP BY c.course_id, c.course_title;

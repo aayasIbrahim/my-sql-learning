@@ -34,3 +34,23 @@ delete from enrollments where progress_percentage is null
 
 --Count how many students are enrolled in each course.
 select course_title, COUNT(student_id) AS student_count from enrollments inner join courses using(course_id) group by course_title
+
+
+
+--Display all students and all courses, even if there is no matching enrollment, using a FULL JOIN.
+SELECT CONCAT(s.first_name, ' ', s.last_name) AS student_name, c.course_title
+FROM students s
+FULL OUTER JOIN enrollments e ON s.student_id = e.student_id
+FULL OUTER JOIN courses c ON e.course_id = c.course_id;
+
+
+--Show the number of enrollments per year based on enrollment_date.
+SELECT EXTRACT(YEAR FROM enrollment_date) AS enrollment_year, COUNT(*) AS total_enrollments
+FROM enrollments
+GROUP BY EXTRACT(YEAR FROM enrollment_date);
+
+
+--Find the average progress percentage per course, ignoring NULL values.
+
+
+
